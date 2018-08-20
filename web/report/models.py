@@ -24,3 +24,9 @@ class Post(models.Model):
     updated_at = models.DateTimeField(null=True)
     created_by = models.ForeignKey(User, related_name='posts',on_delete=models.CASCADE,)
     updated_by = models.ForeignKey(User, null=True, related_name='+',on_delete=models.CASCADE,)
+
+#Board.objects.get(id=1) = get for a specific id
+#board = Board() = instantiate a database
+#Board.objects.create(name='...', description='...') = Create and save an object in the database
+#Board.objects.all() = List all objects
+#
