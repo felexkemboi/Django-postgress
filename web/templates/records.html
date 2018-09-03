@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Boards</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  </head>
+  <body>
+     <!--<i>{{ data }}</i>-->
+     <!--
+    <b>{{ brand }}</b>,
+    {{ oldprice }}
+    {{ newprice }}
+ style="width:100%"
+-->
+    
+ <table style="width:80%">
+  <tr>
+    <th>Record No.</th>
+    <th>Name</th>
+    <th>Brand</th>
+    <th>Original price</th>
+    <th>New Price</th>
+  </tr>
+  {% for item in data %}
+  <tr>
+   <td> <b>{{ item.id }}:</b></td>
+   <td>{{ item.name  }}</td>
+   <td> {{ item.brand  }}</td>
+   <b><td>{{ item.oldprice  }}</td>
+   <td> {{ item.newprice  }}</td></b>
+    {% endfor %}
+  </tr>
+</table> 
+  </body>
+</html>

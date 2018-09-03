@@ -1,7 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 
 # Create your models here.
+
+"""
 #All models are subclass of the django.db.models.Model class
 #Each class will be transformed into database tables
 #fields CharField, DateTimeField, etc., are all subclasses of django.db.models.Field and they come included in the Django core – ready to be used.
@@ -30,3 +32,12 @@ class Post(models.Model):
 #Board.objects.create(name='...', description='...') = Create and save an object in the database
 #Board.objects.all() = List all objects
 #
+"""
+class Item(models.Model):
+   name = models.CharField(max_length=255)
+   brand = models.CharField(max_length=255)
+   oldprice  = models.CharField(max_length=255)
+   newprice = models.CharField(max_length=255)
+
+   def __str__(self):
+    return self.name
