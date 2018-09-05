@@ -32,13 +32,15 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'django.contrib.auth',
+    'django.contrib.auth', #built in user model is activated by default 
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'report'
+    'report',
 ]
+
+#AUTH_USER_MODEL = 'accounts.User' #changes the built in user to our user
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -51,6 +53,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'web.urls'
+
+LOGIN_REDIRECT_URL = 'home'
 
 TEMPLATES = [
     {

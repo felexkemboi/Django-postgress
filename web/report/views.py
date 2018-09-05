@@ -1,26 +1,14 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .models import Item
+from .models import Item,Board,Topic,Post
 #import function to open the url
 from urllib.request import urlopen,Request
 
-"""
-def home(request):
-    return render(request, 'home.html')
-"""
+from django.contrib.auth import login, authenticate,logout,get_user_model
+from django.contrib.auth.forms import UserCreationForm
 
+from report.forms import SignUpForm,LoginForm
 
-
-def home(request):
-    boards = Board.objects.all() #fetch all records in the database and assign it to boards
-    boards_names = list()  #declare an empty list
-
-    for board in boards:                 #sasa wewe Hassan ni wewe utanieleza hii ya for loop
-        boards_names.append(board.name)
-
-    response_html = '<br>'.join(boards_names)
-
-    return HttpResponse(response_html)
 
 def scrap(request):
 	#import BeautifulSoup function
@@ -77,3 +65,55 @@ def records(request):
 	data = Item.objects.all()
 	return render(request, 'records.html',{"data":data})
 
+def boards(request):
+	boards = Board.objects.all()
+	return render(request, 'allnoards.html',{"boards":boards})
+
+def posts(request):
+	posts = Post.objects.all()
+	return render(request, 'allposts.html',{"posts":posts})
+
+def topics(request):
+	topics = Topic.objects.all()
+	return render(request, 'alltopics.html',{"topics":topics})
+
+def loginview(request):
+	form = LoginForm(request.POST or None)
+	if form.is_valid():
+		username = form.cleaned_data.get("username")
+		password = form.cleaned_data.get('password')
+		user = authenticate(username = username,password=password)
+		login(request,user)
+		print(request.user.is_authenticated)
+	return render(request, 'login.html',{'form':form})
+"""
+def signup(request):
+	form = (request.POST or None)
+	if form.is_valid():
+		username = form.cleaned_data.get("username")
+		password = form.cleaned_data.get('password')
+		user = authenticate(username = username,password=password)
+		login(request,user)
+		print(request.user.is_authenticated)
+	return render(request, 'signup.html',{})
+"""
+def logout(request):
+	logout(request,user)
+	return render(request, 'logout.html',{})
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST or None)
+        if form.is_valid():
+            user = form.save(commit=False)
+            #username =     form.cleaned_data.get('username')
+            password =     form.cleaned_data.get('password')
+            #email =        form.cleaned_data.get("email")
+            #user = authenticate(username=username, password=raw_password)
+            user.set_password(password)
+            user.save()
+            login(request,user)
+            print(request.user.is_authenticated)
+    else:
+        form = SignUpForm()
+    return render(request, 'signup.html', {'form': form})

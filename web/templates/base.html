@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Login to Lori{% endblock %}</title>
+</head>
+
+<body style="text-align: center;">
+  <header>
+    <h1>Login to Lori</h1>
+    {% if user.is_authenticated %}
+      Hi {{ user.username }}!
+      <!--<a href="{% url 'logout' %}">logout</a>-->
+    {% else %}
+      <!--<a href="{% url 'login' %}">login</a>-->
+    {% endif %}
+  </header>
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
+  <footer>
+    <a href="#">Link to other url</a>
+  </footer>
+</body>
+</html>
