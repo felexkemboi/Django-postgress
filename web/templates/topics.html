@@ -1,0 +1,45 @@
+
+{% extends 'base1.html' %}
+
+{% block title %}
+  {{ board.name }} - {{ block.super }}
+{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{% url 'allboard' %}">Boards</a></li>
+  <li class="breadcrumb-item active">{{ board.name }}</li>
+{% endblock %}
+
+{% block content %}
+<table class="table">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Topic</th>
+        <th>Comments</th>
+        <th>Lat comment</th>
+        <th>Starter</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for topic in topics %}
+        <tr>
+          <td>
+            <a href="{% url 'topicflani' topic.pk %}">{{ topic.subject }}</a><br><!--board.pk 
+            <small class="text-muted d-block">{{ board.description }}</small>
+              <a href="{% url 'topic_posts' board.pk topic.pk %}">
+
+          -->
+          </td>
+          <td class="align-middle">40</td>
+          <td class="align-middle">12:45pm</td>
+          <td class="align-middle">{{ topic.starter }}</td>
+        </tr>
+        {{ board.pk }}
+        {{ topic.pk}}
+      {% endfor %}
+    </tbody>
+
+</table>
+{% endblock %}
+
+{% url 'topic_posts' board.pk topic.pk %}
